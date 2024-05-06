@@ -10,8 +10,26 @@ const HeaderContainer = styled.header`
 
 const Header = () => (
   <HeaderContainer>
-    <h1>Imran Haidery</h1>
-    <p>Full-Stack Software Developer</p>
+    <header className="bg-gray-800 text-white text-center p-6">
+      <h1 className="text-3xl font-bold">Imran Haidery</h1>
+      <p className="text-lg mt-2">
+        Email:{" "}
+        <a href="mailto:iahaidery@gmail.com" className="text-blue-400 hover:text-blue-300">
+          iahaidery@gmail.com
+        </a>
+      </p>
+      <p className="text-lg">
+        Github:{" "}
+        <a
+          href="https://github.com/imrali02"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-400 hover:text-blue-300"
+        >
+          imrali02
+        </a>
+      </p>
+    </header>
   </HeaderContainer>
 );
 
