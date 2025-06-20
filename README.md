@@ -57,3 +57,13 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Deploying to GitHub Pages
+
+To build and prepare your site for GitHub Pages:
+
+```bash
+npm run build:ghpages
+```
+
+This will build the project into the docs/ folder and copy index.html to 404.html for client-side routing support.
