@@ -1,0 +1,12 @@
+name = "portfolio-contact"
+main = "src/index.ts"
+compatibility_date = "2025-09-01"
+
+[vars]
+# Sites allowed to call this worker. Add your custom domain here if you use one.
+ALLOWED_ORIGINS = "https://imrali02.github.io,http://localhost:4200,http://localhost:4300,https://haidery.dev,https://www.haidery.dev"
+
+# Secrets (never commit these - set them with `npx wrangler secret put <NAME>`):
+#   GOTCHA_SECRET  - GotCHA secret key from https://dashboard.gotcha.land
+#   CONTACT_EMAIL  - address revealed to visitors who pass the captcha
+# For `wrangler dev`, put them in worker/.dev.vars instead (gitignored).

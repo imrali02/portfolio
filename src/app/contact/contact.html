@@ -1,0 +1,64 @@
+<div class="contact panel">
+  <p class="contact__intro">
+    <span class="contact__prompt">&gt;&gt;</span> Want to work together or just say hi?
+    Prove you're human to unlock the contact form.
+  </p>
+
+  <div class="contact__captcha">
+    <div #widget></div>
+
+    <p class="contact__status" aria-live="polite">
+      <span class="contact__prompt">status:</span>
+      @switch (status()) {
+        @case ('unlocked') {
+          <span class="contact__unlocked">UNLOCKED</span>
+        }
+        @case ('loading') {
+          LOADING<span class="blink">_</span>
+        }
+        @case ('verifying') {
+          VERIFYING<span class="blink">_</span>
+        }
+        @case ('rejected') {
+          <span class="contact__error">VERIFICATION_FAILED - solve the captcha again</span>
+        }
+        @case ('error') {
+          <span class="contact__error">CAPTCHA_ERROR - refresh to try again</span>
+        }
+        @case ('unconfigured') {
+          <span class="contact__error">CAPTCHA_NOT_CONFIGURED</span>
+        }
+        @default {
+          LOCKED - solve the captcha above
+        }
+      }
+    </p>
+  </div>
+
+  <form class="contact__form" (submit)="send($event, subject.value, message.value)">
+    <fieldset [disabled]="!unlocked()" [class.is-locked]="!unlocked()">
+      <legend class="contact__to">
+        <span class="contact__prompt">to:</span>
+        @if (unlocked()) {
+          <a [href]="'mailto:' + email()">{{ email() }}</a>
+        } @else {
+          <span aria-label="Hidden until captcha is solved">████████████████</span>
+        }
+      </legend>
+
+      <label class="contact__field">
+        <span class="contact__prompt">subject:</span>
+        <input #subject type="text" name="subject" maxlength="150" required />
+      </label>
+
+      <label class="contact__field">
+        <span class="contact__prompt">message:</span>
+        <textarea #message name="message" rows="6" maxlength="2000" required></textarea>
+      </label>
+
+      <button type="submit" class="ascii-btn">
+        {{ unlocked() ? '[send_email →]' : '[locked]' }}
+      </button>
+    </fieldset>
+  </form>
+</div>

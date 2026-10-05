@@ -40,3 +40,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Cloudflare worker
+/worker/node_modules
+/worker/.wrangler
+/worker/.dev.vars

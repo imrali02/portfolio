@@ -1,1 +1,247 @@
-/* You can add global styles to this file, and also import other style files */
+/* Terminal / ASCII-art theme */
+
+:root {
+  --background: oklch(0.98 0.002 264);
+  --foreground: oklch(0.15 0.01 264);
+  --card: oklch(1 0 0);
+  --muted-foreground: oklch(0.5 0.01 264);
+  --accent: oklch(0.55 0.15 170);
+  --accent-soft: oklch(0.55 0.15 170 / 0.1);
+  --accent-faint: oklch(0.55 0.15 170 / 0.3);
+  --cyan: oklch(0.6 0.12 200);
+  --border: oklch(0.3 0.02 264);
+  --font-mono: "JetBrains Mono", "Geist Mono", "Courier New", monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-mono);
+  color: var(--foreground);
+  background-color: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Scanlines, vertical grid, horizontal grid, diagonal accent lines */
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      oklch(0.55 0.15 170 / 0.03) 2px,
+      oklch(0.55 0.15 170 / 0.03) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      oklch(0.55 0.15 170 / 0.15) 0px,
+      transparent 1px,
+      transparent 40px,
+      oklch(0.55 0.15 170 / 0.15) 41px
+    ),
+    repeating-linear-gradient(
+      180deg,
+      oklch(0.6 0.12 200 / 0.12) 0px,
+      transparent 1px,
+      transparent 40px,
+      oklch(0.6 0.12 200 / 0.12) 41px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 80px,
+      oklch(0.65 0.14 140 / 0.08) 80px,
+      oklch(0.65 0.14 140 / 0.08) 81px
+    );
+  background-size: 100% 100%, 40px 40px, 40px 40px, 113px 113px;
+  position: relative;
+}
+
+/* Subtle vignette */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 0%, oklch(0.12 0.01 264 / 0.4) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+body > * {
+  position: relative;
+  z-index: 2;
+}
+
+h1,
+h2,
+h3,
+p,
+pre {
+  margin: 0;
+}
+
+pre {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--background);
+}
+
+/* ---------- Layout ---------- */
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+}
+
+.container__inner {
+  max-width: 56rem;
+  margin: 0 auto;
+
+  &--wide {
+    max-width: 64rem;
+  }
+}
+
+/* ---------- ASCII building blocks ---------- */
+
+// A box-drawing rule that stretches to its container: ╔═════╗
+.ascii-rule {
+  display: flex;
+  color: var(--accent);
+  white-space: nowrap;
+  line-height: 1.5;
+
+  &__fill {
+    flex: 1;
+    overflow: hidden;
+
+    &::before {
+      content: "══════════════════════════════════════════════════════════════════════════════════════════════════════════════════";
+    }
+  }
+}
+
+.section-heading {
+  width: min(100%, 50ch);
+  margin: 0 auto 1.5rem;
+  font-size: 0.75rem;
+  color: var(--accent);
+  text-align: center;
+
+  &__label {
+    font-weight: 700;
+    line-height: 1.5;
+  }
+}
+
+.panel {
+  border: 2px solid var(--border);
+  background-color: var(--card);
+  transition: border-color 0.3s ease;
+
+  &:hover {
+    border-color: var(--accent);
+  }
+}
+
+.ascii-btn {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--border);
+  background: none;
+  font-family: inherit;
+  font-size: 0.75rem;
+  color: var(--accent);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--foreground);
+    background-color: var(--accent-soft);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+/* ---------- Effects ---------- */
+
+.neon-text {
+  color: var(--accent);
+  text-shadow:
+    0 0 1px var(--accent),
+    0 0 8px oklch(0.55 0.15 170 / 0.35);
+}
+
+.neon-cyan {
+  color: var(--cyan);
+  text-shadow: 0 0 6px oklch(0.6 0.12 200 / 0.5);
+}
+
+.pulse-border {
+  border-style: solid;
+  border-left: 0;
+  border-right: 0;
+  animation: pulse-border 3s ease-in-out infinite;
+}
+
+@keyframes pulse-border {
+  0%,
+  100% {
+    border-color: var(--border);
+  }
+  50% {
+    border-color: var(--accent);
+  }
+}
+
+.blink {
+  animation: blink 1.1s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-heading {
+    font-size: 0.875rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .pulse-border,
+  .blink {
+    animation: none;
+  }
+}

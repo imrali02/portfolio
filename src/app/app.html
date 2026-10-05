@@ -1,38 +1,68 @@
-<main class="main">
-  <section class="hero">
-    <div class="hero-background"></div>
-    <div class="hero-content">
-      <h1>Imran Haidery</h1>
-      <p class="subtitle">Full Stack Developer</p>
-      <a href="assets/resume.pdf" class="resume-button" download>
-        Download Resume
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+<main>
+  <section class="container hero">
+    <div class="hero__content">
+      <pre class="hero__banner neon-text" aria-hidden="true">{{ banner }}</pre>
+
+      <div class="hero__text">
+        <h1>&gt;Full Stack Developer</h1>
+        <p class="hero__occupation pulse-border">
+          <span class="neon-cyan">&gt;</span>press any key to continue<span
+            class="blink"
+            >_</span
+          >
+        </p>
+        <a href="assets/resume.pdf" class="ascii-btn" download
+          >[download_resume ↓]</a
         >
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-          <polyline points="7 10 12 15 17 10" />
-          <line x1="12" y1="15" x2="12" y2="3" />
-        </svg>
-      </a>
+      </div>
+    </div>
+
+    <span class="hero__corner hero__corner--tl" aria-hidden="true">╔═══</span>
+    <span class="hero__corner hero__corner--tr" aria-hidden="true">═══╗</span>
+    <span class="hero__corner hero__corner--bl" aria-hidden="true">╚═══</span>
+    <span class="hero__corner hero__corner--br" aria-hidden="true">═══╝</span>
+  </section>
+
+  <section class="container" id="projects">
+    <div class="container__inner container__inner--wide">
+      <div class="section-heading">
+        <div class="ascii-rule" aria-hidden="true">
+          <span>╔</span><span class="ascii-rule__fill"></span><span>╗</span>
+        </div>
+        <h2 class="section-heading__label">║ PROJECTS ║</h2>
+        <div class="ascii-rule" aria-hidden="true">
+          <span>╚</span><span class="ascii-rule__fill"></span><span>╝</span>
+        </div>
+      </div>
+
+      <div class="projects-grid">
+        @for (project of projects; track project.id) {
+        <app-project-card [project]="project" />
+        }
+      </div>
     </div>
   </section>
 
-  <section class="projects">
-    <h2>My Projects</h2>
-    <div class="projects-grid">
-      @for (project of projects; track project.id) {
-      <app-project-card [project]="project"></app-project-card>
-      }
+  <section class="container" id="contact">
+    <div class="container__inner">
+      <div class="section-heading">
+        <div class="ascii-rule" aria-hidden="true">
+          <span>╔</span><span class="ascii-rule__fill"></span><span>╗</span>
+        </div>
+        <h2 class="section-heading__label">║ CONTACT ME ║</h2>
+        <div class="ascii-rule" aria-hidden="true">
+          <span>╚</span><span class="ascii-rule__fill"></span><span>╝</span>
+        </div>
+      </div>
+
+      <app-contact />
     </div>
   </section>
+
+  <footer class="container footer">
+    <pre class="footer__box">{{ footerBox }}</pre>
+    <p class="footer__meta">© {{ year }} • Built with Angular</p>
+  </footer>
 </main>
 
 <router-outlet />
